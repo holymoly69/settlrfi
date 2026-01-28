@@ -1,0 +1,550 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'JetBrains Mono', monospace;
+  --font-body: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Terminal Theme - Pure Black */
+  --background: 0 0% 0%;
+  --foreground: 120 100% 50%;
+
+  /* Card - Slightly elevated black */
+  --card: 0 0% 2%;
+  --card-foreground: 120 100% 50%;
+
+  --popover: 0 0% 2%;
+  --popover-foreground: 120 100% 50%;
+
+  /* Matrix Green for Primary */
+  --primary: 120 100% 50%;
+  --primary-foreground: 0 0% 0%;
+
+  /* Green Accent */
+  --accent: 120 100% 50%;
+  --accent-foreground: 0 0% 0%;
+
+  /* Muted Gray */
+  --secondary: 0 0% 20%;
+  --secondary-foreground: 120 100% 50%;
+
+  --muted: 0 0% 8%;
+  --muted-foreground: 0 0% 45%;
+
+  /* Red for Destructive */
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 0 0% 15%;
+  --input: 0 0% 4%;
+  --ring: 120 100% 50%;
+
+  --radius: 0rem;
+
+  /* Terminal Colors - Muted green, no glow */
+  --terminal-green: #66ff66;
+  --terminal-gray: #444444;
+  --terminal-cyan: #88ffff;
+  --terminal-amber: #ffaa00;
+}
+
+@layer base {
+  body {
+    @apply bg-background antialiased;
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: var(--terminal-green);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight;
+    color: var(--terminal-green);
+  }
+
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
+  h3 { font-size: 18px; }
+  h4, h5, h6 { font-size: 14px; }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--terminal-gray);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--terminal-green);
+  }
+
+  * {
+    border-radius: 0 !important;
+  }
+}
+
+@layer components {
+  /* ASCII Border Frame */
+  .ascii-frame {
+    border: 1px solid var(--terminal-green);
+    position: relative;
+  }
+
+  .ascii-frame::before {
+    content: '┌' attr(data-title) '─────────────────────────────────────────────────────────────────┐';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    color: var(--terminal-green);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* Terminal Card */
+  .terminal-card {
+    background: #000;
+    border: 1px solid var(--terminal-green);
+    padding: 1rem;
+  }
+
+  .terminal-card:hover {
+    border-color: var(--terminal-green);
+  }
+
+  /* Gradient Text - Green (no glow) */
+  .gradient-text {
+    color: var(--terminal-green);
+  }
+
+  /* Blinking Cursor */
+  .blink {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Terminal Button */
+  .terminal-btn {
+    background: transparent;
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-green);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .terminal-btn:hover {
+    background: var(--terminal-green);
+    color: #000;
+  }
+
+  /* CRT Effect */
+  .crt-effect {
+    filter: contrast(1.1) brightness(1.05);
+  }
+
+  .crt-effect::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+  }
+
+  /* ASCII Table */
+  .ascii-table {
+    font-family: var(--font-mono);
+    color: var(--terminal-green);
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .ascii-table th,
+  .ascii-table td {
+    padding: 0.5rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--terminal-gray);
+  }
+
+  .ascii-table tr:hover {
+    background: rgba(0, 255, 65, 0.1);
+  }
+
+  /* Terminal Input */
+  .terminal-input {
+    background: transparent;
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-green);
+    padding: 0.5rem;
+    font-family: var(--font-mono);
+    width: 100%;
+  }
+
+  .terminal-input:focus {
+    outline: none;
+    border-color: var(--terminal-green);
+  }
+
+  .terminal-input::placeholder {
+    color: var(--terminal-gray);
+  }
+
+  /* Live Indicator */
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--terminal-green);
+    animation: pulse-live 1.5s ease-in-out infinite;
+  }
+
+  /* Stat Value */
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--terminal-green);
+  }
+
+  /* HOT Badge */
+  .hot-badge {
+    padding: 0.125rem 0.5rem;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: var(--terminal-amber);
+    color: #000;
+  }
+
+  /* Probability Bar */
+  .prob-bar {
+    height: 4px;
+    background: var(--terminal-gray);
+    overflow: hidden;
+  }
+
+  .prob-bar-fill {
+    height: 100%;
+    background: var(--terminal-green);
+    transition: width 0.5s;
+  }
+
+  /* Flash Animations */
+  .flash-green {
+    animation: flash-green 0.5s ease-out;
+  }
+
+  .flash-red {
+    animation: flash-red 0.5s ease-out;
+  }
+
+  /* ASCII Spinner */
+  .ascii-spinner {
+    display: inline-block;
+    animation: spin-ascii 0.5s steps(4) infinite;
+  }
+
+  .ascii-spinner::before {
+    content: '|';
+  }
+
+  @keyframes spin-ascii {
+    0% { content: '|'; }
+    25% { content: '/'; }
+    50% { content: '-'; }
+    75% { content: '\\'; }
+  }
+
+  /* Glass card fallback for compatibility */
+  .glass-card {
+    background: #000;
+    border: 1px solid var(--terminal-green);
+  }
+
+  .glass-card-glow {
+    background: #000;
+    border: 1px solid var(--terminal-green);
+  }
+
+  /* Border effects - Terminal style (no glow) */
+  .neon-glow-cyan,
+  .neon-glow-green {
+    border: 1px solid var(--terminal-green);
+  }
+
+  .neon-glow-purple {
+    border: 1px solid #cc66ff;
+  }
+
+  .neon-glow-red {
+    border: 1px solid #ff6666;
+  }
+
+  .neon-border-cyan,
+  .neon-border-green {
+    border: 1px solid var(--terminal-green);
+  }
+
+  /* Button glow */
+  .btn-glow {
+    background: transparent;
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-green);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-glow:hover {
+    background: var(--terminal-green);
+    color: #000;
+  }
+
+  /* Pill button */
+  .pill-button {
+    background: transparent;
+    border: 1px solid var(--terminal-gray);
+    color: var(--terminal-green);
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+
+  .pill-button:hover {
+    border-color: var(--terminal-green);
+  }
+
+  .pill-button.active {
+    background: var(--terminal-green);
+    color: #000;
+    border-color: var(--terminal-green);
+  }
+
+  /* Card hover */
+  .card-hover {
+    transition: all 0.2s;
+  }
+
+  .card-hover:hover {
+    border-color: var(--terminal-green);
+  }
+
+  /* Gradient text green (no glow) */
+  .gradient-text-green {
+    color: var(--terminal-green);
+  }
+
+  /* Skeleton loading */
+  .skeleton-neon {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 255, 65, 0.05) 0%,
+      rgba(0, 255, 65, 0.15) 50%,
+      rgba(0, 255, 65, 0.05) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+}
+
+/* Animations */
+@keyframes pulse-live {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes flash-green {
+  0% { background-color: rgba(0, 255, 65, 0.3); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flash-red {
+  0% { background-color: rgba(255, 0, 0, 0.3); }
+  100% { background-color: transparent; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Particle Background - Terminal style */
+.particle-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 0, 255, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Terminal Typing Background - Onboarding popup only */
+.matrix-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes terminal-type {
+  0% { width: 0; }
+  80% { width: 100%; }
+  100% { width: 100%; opacity: 0; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { border-right-color: transparent; }
+  50% { border-right-color: currentColor; }
+}
+
+.matrix-string {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: terminal-type linear infinite;
+  border-right: 2px solid currentColor;
+}
+
+/* Green strings */
+.matrix-string:nth-child(1) { 
+  top: 8%; left: 5%; 
+  color: #66ff66; 
+  animation-duration: 8s; 
+  animation-delay: 0s;
+}
+.matrix-string:nth-child(2) { 
+  top: 92%; left: 10%; 
+  color: #66ff66; 
+  animation-duration: 10s; 
+  animation-delay: 1.5s;
+}
+
+/* Cyan strings */
+.matrix-string:nth-child(3) { 
+  top: 25%; right: 5%; left: auto;
+  color: #88ffff; 
+  animation-duration: 7s; 
+  animation-delay: 0.5s;
+}
+.matrix-string:nth-child(4) { 
+  top: 75%; right: 8%; left: auto;
+  color: #88ffff; 
+  animation-duration: 9s; 
+  animation-delay: 2s;
+}
+
+/* Amber strings */
+.matrix-string:nth-child(5) { 
+  top: 42%; left: 3%; 
+  color: #ffaa00; 
+  animation-duration: 11s; 
+  animation-delay: 3s;
+}
+.matrix-string:nth-child(6) { 
+  top: 58%; right: 3%; left: auto;
+  color: #ffaa00; 
+  animation-duration: 8s; 
+  animation-delay: 4s;
+}
+
+/* Purple accent */
+.matrix-string:nth-child(7) { 
+  top: 15%; left: 50%; 
+  color: #cc66ff; 
+  animation-duration: 12s; 
+  animation-delay: 2.5s;
+}
+.matrix-string:nth-child(8) { 
+  top: 85%; left: 40%; 
+  color: #cc66ff; 
+  animation-duration: 9s; 
+  animation-delay: 5s;
+}
+
+/* Earn Page Terminal Animation - matches popup typing style */
+.earn-border-text {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.earn-margin-text {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  border-right: 1px solid currentColor;
+  animation: earn-type-text var(--duration, 2s) steps(var(--steps, 20)) var(--delay, 0s) forwards,
+             earn-blink-cursor 0.6s step-end var(--delay, 0s) infinite;
+}
+
+@keyframes earn-type-text {
+  from { width: 0; }
+  to { width: var(--chars, 15ch); }
+}
+
+@keyframes earn-blink-cursor {
+  0%, 100% { border-right-color: transparent; }
+  50% { border-right-color: currentColor; }
+}

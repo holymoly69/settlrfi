@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settlr Terminal Intro</title>
+  <style>
+    body {
+      background: #000;
+      color: #66ff66;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    pre {
+      font-size: 18px;
+      text-align: center;
+      white-space: pre;
+      line-height: 1.4;
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    @media (max-width: 768px) {
+      pre { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <pre id="typing"></pre>
+
+  <script>
+    const fullText = `╔════════════════════════════════════════════════════════════╗
+║                       WELCOME TO SETTLR                    ║
+║                                                            ║
+║  Leveraged perpetual contracts on real-world events       ║
+║  Up to 50x on Politics, Crypto, Sports, Macro              ║
+║                                                            ║
+║  > connect wallet _                                        ║
+╚════════════════════════════════════════════════════════════╝`;
+
+    let i = 0;
+    const speed = 40;
+
+    function type() {
+      if (i < fullText.length) {
+        document.getElementById('typing').textContent += fullText.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      } else {
+        const cursor = document.createElement('span');
+        cursor.className = 'blink';
+        cursor.textContent = '_';
+        document.getElementById('typing').appendChild(cursor);
+      }
+    }
+
+    type();
+  </script>
+</body>
+</html>

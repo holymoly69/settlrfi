@@ -1,0 +1,11 @@
+[
+  {"id":5,"user_id":"bad0b03d-341a-4dfd-ab97-d95cd431ea38","market_id":2,"side":"YES","size":100,"leverage":1,"entry_probability":64,"status":"open","pnl":0},
+  {"id":7,"user_id":"47bbe1bb-37c1-4b87-9368-c39fb686f383","market_id":2,"side":"YES","size":100,"leverage":1,"entry_probability":48,"status":"open","pnl":0},
+  {"id":8,"user_id":"4951e700-5ca8-4a55-9d7d-bfee8823789f","market_id":2,"side":"YES","size":10,"leverage":1,"entry_probability":39,"status":"open","pnl":0},
+  {"id":9,"user_id":"521ccae7-02e5-4767-a94d-a9e4a7246d12","market_id":28,"side":"YES","size":1600,"leverage":16,"entry_probability":1,"status":"open","pnl":0},
+  {"id":2,"user_id":"f9c10e91-11d2-4f15-b4f9-934e39397ae5","market_id":2,"side":"YES","size":500,"leverage":1,"entry_probability":39,"status":"closed","pnl":-19},
+  {"id":3,"user_id":"a83d512f-99d6-445a-8d6e-de8af6380a8a","market_id":1,"side":"YES","size":200,"leverage":1,"entry_probability":38,"status":"closed","pnl":-22},
+  {"id":4,"user_id":"6ea78686-29e8-4424-a01f-f4e5d1796a69","market_id":4,"side":"YES","size":50,"leverage":26,"entry_probability":71,"status":"closed","pnl":-541},
+  {"id":1,"user_id":"6ea78686-29e8-4424-a01f-f4e5d1796a69","market_id":4,"side":"YES","size":50,"leverage":26,"entry_probability":71,"status":"closed","pnl":-516},
+  {"id":6,"user_id":"6228b21b-db47-47e6-a0db-7f68040487b9","market_id":2,"side":"YES","size":1000,"leverage":10,"entry_probability":62,"status":"liquidated","pnl":-100}
+]
